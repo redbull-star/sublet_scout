@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cozy Bedroom in Times Square | Sublet Scout</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY3muo8vY0_SVb93GTKzleP8fHSlYf76Q"></script>
 </head>
 <body>
     <div class="container">
@@ -26,7 +27,8 @@
         </div>
 
         <div class="map">
-            <img src="../src/images/map_placeholder.png" alt="Apartment Location Map" style="width: 33%; height: auto;">
+            <h2>Location</h2>
+            <div id="google-map" style="width: 40%; height: 400px;"></div>
         </div>
 
         <h2>Amenities</h2>
@@ -40,5 +42,19 @@
             <li>Refrigerator</li>
         </ul>
     </div>
+    <script>
+        function initMap() {
+            const location = { lat: 40.758896, lng: -73.985130 };
+            const map = new google.maps.Map(document.getElementById("google-map"), {
+                zoom: 14,
+                center: location,
+            });
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+        }
+        window.onload = initMap;
+    </script>
 </body>
 </html>
