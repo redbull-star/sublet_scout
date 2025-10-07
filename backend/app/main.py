@@ -27,3 +27,21 @@ app = FastAPI()
 @app.get("/")
 def root():
     return {"message": "Connected to Neon PostgreSQL successfully!"}
+
+@app.post("/add_dummy")
+def add_dummy_user():
+    session = SessionLocal()
+    new_user = User(name="Ada Lovelace", email="ada_lovelace@example.com")
+    session.add(new_user)
+    session.commit()
+    session.close()
+    return {"status": "added", "user": {"name": "Ada Lovelace", "email": "ada_lovelace@example.com"}}
+
+@app.get("/users")
+def list_users():
+    session = SessionLocal()
+    users = session.query(User).all()
+    result = [{"id": u.id, "name": u.name, "email": u.email} for u in users]
+    session.close()
+    return result
+
